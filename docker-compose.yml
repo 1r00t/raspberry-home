@@ -11,8 +11,8 @@ services:
     
     frontend:
         build: ./frontend
-        expose:
-            - "8080"
+        ports:
+            - "8080:8080"
         volumes:
             - ./frontend:/code
         environment:
