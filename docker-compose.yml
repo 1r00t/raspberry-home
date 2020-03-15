@@ -1,0 +1,20 @@
+version: "3"
+services:
+    backend:
+        build: ./backend
+        ports:
+            - "5000:5000"
+        volumes:
+            - ./backend:/code
+        environment: 
+            FLASK_ENV: development
+    
+    frontend:
+        build: ./frontend
+        expose:
+            - "8080"
+        volumes:
+            - ./frontend:/code
+        environment:
+            - NODE_ENV=development
+        command: "npm run serve"
