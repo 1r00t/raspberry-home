@@ -5,4 +5,3 @@ WORKDIR /code
 COPY . .
 
 RUN npm install
-RUN npm start
