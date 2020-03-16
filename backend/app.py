@@ -9,7 +9,8 @@ app = Flask(__name__)
 api = Api(app)
 
 
-CORS(app, resources={r"/*": {"origins": "*"}})
+# CORS(app, resources={r"/*": {"origins": "*"}})
+CORS(app)
 
 
 class SpeedTest(Resource):
