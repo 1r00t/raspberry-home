@@ -8,9 +8,7 @@ services:
             - ./backend:/code
         environment: 
             FLASK_ENV: development
-        networks:
-            - web
-    
+
     frontend:
         build:
             context: ./frontend
@@ -19,8 +17,3 @@ services:
             - "8080:80"
         volumes:
             - ./frontend/src:/code/src
-        networks:
-            - web
-    
-networks:
-    web:

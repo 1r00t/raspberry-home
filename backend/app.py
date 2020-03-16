@@ -9,8 +9,7 @@ app = Flask(__name__)
 api = Api(app)
 
 
-# CORS(app, resources={r"/*": {"origins": "*"}})
-CORS(app, origins=["http://localhost", "http://localhost:5000", "http://localhost:8080", "http://raspberrypi:5000", "http://raspberrypi:8080"])
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 class SpeedTest(Resource):

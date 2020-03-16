@@ -2,23 +2,16 @@ version: "3"
 services:
     backend:
         build: ./backend
-        expose:
-            - "5000"
+        ports:
+            - "5000:5000"
         volumes:
             - ./backend:/code
         environment: 
             FLASK_ENV: development
-        networks:
-            - web
-    
+
     frontend:
         build: ./frontend
         ports:
             - "8080:80"
         volumes:
             - ./frontend/src:/code/src
-        networks:
-            - web
-
-networks:
-    web:
