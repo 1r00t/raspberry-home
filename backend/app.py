@@ -6,10 +6,8 @@ import os
 from crontab import CronTab
 
 app = Flask(__name__)
-api = Api(app)
-
-
 CORS(app, resources={r"/*": {"origins": "*"}})
+api = Api(app)
 
 
 class SpeedTest(Resource):
