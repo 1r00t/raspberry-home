@@ -12,9 +12,6 @@ services:
     frontend:
         build: ./frontend
         ports:
-            - "8080:8080"
+            - "8080:80"
         volumes:
             - ./frontend/src:/code/src
-        environment:
-            - NODE_ENV=development
-        command: "npm run serve"
