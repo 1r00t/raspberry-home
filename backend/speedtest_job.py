@@ -3,10 +3,13 @@ from datetime import datetime
 import os
 from csv import DictWriter
 import pathlib
+import logging
 
 
 BASE_DIR = pathlib.Path(__file__).parent.absolute()
 LOG_CSV = os.path.join(BASE_DIR, "connection_log.csv")
+
+logging.basicConfig(filename='speedtest.log', level=logging.DEBUG)
 
 
 class SpeedTest():
@@ -63,13 +66,16 @@ class SpeedTest():
 
 
 if __name__ == "__main__":
-    print("Initializing ...")
+
+    logging.debug("Initializing Speedtest ...")
+
+    logging.debug("Initializing ...")
     speed_test = SpeedTest()
 
-    print("Running ...")
+    logging.debug("Running ...")
     speed_test.run()
 
-    print("Writing log file ...")
+    logging.debug("Writing log file ...")
     speed_test.write_log()
 
-    print("Done!")
+    logging.debug("Done!")

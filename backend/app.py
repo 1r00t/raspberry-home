@@ -5,20 +5,27 @@ import os
 
 from crontab import CronTab
 
+
+# create app
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "http://localhost:port"}})
 api = Api(app)
 
 
 class SpeedTest(Resource):
+    '''
+    Tests the speed of the internet connection.
+    '''
     def __init__(self):
         self.job = None
         self.cron = CronTab(user=True)
         command = os.environ["SPEEDTEST_CMD"]
 
+        # get job
         for job in self.cron:
             if job.comment == "speedtest":
                 self.job = job
+        # create job
         if not self.job:
             self.job = self.cron.new(command=command, comment="speedtest")
             self.job.minute.every(2)
@@ -26,16 +33,22 @@ class SpeedTest(Resource):
             self.cron.write()
 
     def get(self):
-        return {"is_enabled": self.job.is_enabled()}
+        return {
+            "is_enabled": self.job.is_enabled()
+        }
 
     def post(self):
         data = request.get_json()
+
+        # start job
         if data.get("job") == "start":
             self.job.enable()
             if data.get("minute"):
                 self.job.minute.every(data.get("minute"))
             self.cron.write()
             return {"is_enabled": True}
+        
+        # stop job
         elif data.get("job") == "stop":
             self.job.enable(False)
             self.cron.write()
