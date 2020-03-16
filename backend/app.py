@@ -2,12 +2,15 @@ from flask import Flask, request
 from flask_restful import Resource, Api
 from flask_cors import CORS
 import os
+import logging
 
 from crontab import CronTab
 
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
 api = Api(app)
+
+logging.getLogger('flask_cors').level = logging.DEBUG
 
 
 class SpeedTest(Resource):
