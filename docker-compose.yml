@@ -9,7 +9,7 @@ services:
         environment: 
             FLASK_ENV: development
         networks:
-            - web:
+            - web
     
     frontend:
         build: ./frontend
@@ -18,7 +18,7 @@ services:
         volumes:
             - ./frontend/src:/code/src
         networks:
-            - web:
+            - web
 
 networks:
     web:
