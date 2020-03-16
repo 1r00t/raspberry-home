@@ -24,6 +24,7 @@ export default {
     startSpeedTest() {
       this.axios
         .post("http://localhost:5000/speedtest", {
+          crossdomain: true,
           job: "start",
           minute: 2
         })
@@ -32,6 +33,7 @@ export default {
     stopSpeedTest() {
       this.axios
         .post("http://localhost:5000/speedtest", {
+          crossdomain: true,
           job: "stop"
         })
         .then(response => (this.is_enabled = response.data.is_enabled));
@@ -48,7 +50,7 @@ export default {
   },
   mounted() {
     this.axios
-      .get("http://localhost:5000/speedtest")
+      .get("http://localhost:5000/speedtest", {crossdomain: true})
       .then(response => (this.is_enabled = response.data.is_enabled));
   }
 };
