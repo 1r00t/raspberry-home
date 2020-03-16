@@ -1,6 +1,6 @@
 from flask import Flask, request
 from flask_restful import Resource, Api
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 import os
 
 from crontab import CronTab
@@ -25,9 +25,11 @@ class SpeedTest(Resource):
             self.job.enable(False)
             self.cron.write()
 
+    @cross_origin(origin="*")
     def get(self):
         return {"is_enabled": self.job.is_enabled()}
 
+    @cross_origin(origin="*")
     def post(self):
         data = request.get_json()
         if data.get("job") == "start":
