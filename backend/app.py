@@ -1,12 +1,12 @@
 from flask import Flask, request
 from flask_restful import Resource, Api
-from flask_cors import CORS
+# from flask_cors import CORS
 import os
 
 from crontab import CronTab
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": ["http://localhost:5000", "http://127.0.0.1:5000", "http://192.168.44.39:5000", "http://raspberrypi:5000"]}})
+# CORS(app)
 api = Api(app)
 
 
@@ -44,6 +44,12 @@ class SpeedTest(Resource):
 
 
 api.add_resource(SpeedTest, "/speedtest")
+
+
+@app.after_request
+def add_headers(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
 
 
 if __name__ == "__main__":
