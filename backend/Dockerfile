@@ -8,7 +8,8 @@ ENV SPEEDTEST_CMD python /code/speedtest_job.py
 RUN apk add --no-cache gcc musl-dev linux-headers
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
-RUN crond -f -l 8
 COPY . .
+RUN chmod 755 run_cron.sh
+RUN sh run_cron.sh 
 
 CMD ["flask", "run"]
