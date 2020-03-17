@@ -23,7 +23,7 @@ export default {
   methods: {
     startSpeedTest() {
       this.axios
-        .post("http://192.168.44.39:5000/speedtest", {
+        .post("http://127.0.0.1:5000/speedtest", {
           job: "start",
           minute: 2
         })
@@ -31,7 +31,7 @@ export default {
     },
     stopSpeedTest() {
       this.axios
-        .post("http://192.168.44.39:5000/speedtest", {
+        .post("http://127.0.0.1:5000/speedtest", {
           job: "stop"
         })
         .then(response => (this.is_enabled = response.data.is_enabled));
@@ -48,7 +48,7 @@ export default {
   },
   mounted() {
     this.axios
-      .get("http://192.168.44.39:5000/speedtest")
+      .get("http://127.0.0.1:5000/speedtest")
       .then(response => (this.is_enabled = response.data.is_enabled));
   }
 };
