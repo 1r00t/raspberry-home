@@ -11,7 +11,7 @@ COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
 COPY . .
-
+COPY entry.sh entry.sh
 RUN chmod 755 entry.sh
 
 CMD ["/code/entry.sh"]
