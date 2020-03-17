@@ -12,8 +12,7 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-ADD entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-ENTRYPOINT [ "/entrypoint.sh" ]
+ADD entrypoint.sh entrypoint.sh
+RUN chmod +x entrypoint.sh
 
-CMD [ "flask", "run" ]
+CMD [ "entrypoint.sh" ]
