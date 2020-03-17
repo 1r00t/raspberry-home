@@ -15,4 +15,4 @@ RUN chmod 755 entry.sh
 
 COPY . .
 
-CMD ["entry.sh"]
+CMD ["/code/entry.sh"]
