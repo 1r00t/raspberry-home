@@ -10,9 +10,8 @@ RUN apk add --no-cache gcc musl-dev linux-headers
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
-COPY entry.sh entry.sh
-RUN chmod 755 entry.sh
-
 COPY . .
+
+RUN chmod 755 entry.sh
 
 CMD ["/code/entry.sh"]
