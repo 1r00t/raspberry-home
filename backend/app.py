@@ -6,7 +6,7 @@ import os
 from crontab import CronTab
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": ["http://localhost:port", "http://127.0.0.1:port", "http://192.168.44.39:port"]}})
+CORS(app, resources={r"/*": {"origins": ["http://localhost:5000", "http://127.0.0.1:5000", "http://192.168.44.39:5000", "http://raspberrypi:5000"]}})
 api = Api(app)
 
 
