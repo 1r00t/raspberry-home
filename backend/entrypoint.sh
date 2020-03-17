@@ -2,6 +2,3 @@
 
 # start crond
 /usr/sbin/crond -f -l 8
-
-# start flask
-flask run
