@@ -1,12 +1,12 @@
 from flask import Flask, request, jsonify
 from flask_restful import Resource, Api
-# from flask_cors import CORS
+from flask_cors import CORS
 import os
 
 from crontab import CronTab
 
 app = Flask(__name__)
-# CORS(app)
+CORS(app)
 api = Api(app)
 
 
