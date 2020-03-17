@@ -6,4 +6,5 @@ echo "- STARTING CROND!!!! -"
 
 # start flask
 echo "- STARTING FLASK!!!! -"
+cd /code
 flask run
