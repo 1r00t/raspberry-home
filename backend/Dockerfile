@@ -6,10 +6,13 @@ ENV FLASK_RUN_HOST 0.0.0.0
 ENV SPEEDTEST_CMD python /code/speedtest_job.py
 
 RUN apk add --no-cache gcc musl-dev linux-headers
+
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
-COPY . .
-RUN chmod 755 run_cron.sh
-RUN sh run_cron.sh 
 
-CMD ["flask", "run"]
+COPY entry.sh entry.sh
+RUN chmod 755 entry.sh
+
+COPY . .
+
+CMD ["entry.sh"]
