@@ -13,10 +13,12 @@ class SpeedTest():
     def __init__(self, servers=[], threads=None):
         self.servers = servers
         self.threads = threads
-        self.time = datetime.now().strftime("%d.%m.%Y %H:%M:%S")
+        self.time = None
         self.result_json = None
 
     def run(self):
+        self.time = datetime.now().strftime("%d.%m.%Y %H:%M:%S")
+
         try:
             self.st = speedtest.Speedtest()
         except speedtest.ConfigRetrievalError or speedtest.ShareResultsConnectFailure:

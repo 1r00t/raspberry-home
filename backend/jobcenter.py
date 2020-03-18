@@ -1,39 +1,38 @@
 from jobs.speedtest_job import SpeedTest
-import threading
+from threading import Event, Thread
 from time import sleep
 
 
 class Jobs():
     def __init__(self, *args, **kwargs):
-        self.workers = {
-            "speedtest": {
-                "thread": threading.Thread(target=self.speedtest),
-                "running": False
-            }
-        }
+        self.exit = Event()
+        self.exit.set()
+        self.worker = None
 
     def speedtest(self, minutes=2):
-        while self.workers["speedtest"]["running"]:
-            speedtest = SpeedTest()
+        speedtest = SpeedTest()
+
+        while not self.exit.is_set():
             speedtest.run()
             speedtest.write_log()
 
-            sleep(minutes * 60)
+            self.exit.wait(minutes * 60)
 
     def speedtest_start(self, minutes):
-        if self.workers["speedtest"]["running"]:
-            return
-
-        self.workers["speedtest"]["running"] = True
-        self.workers["speedtest"]["thread"].args = [minutes]
-        self.workers["speedtest"]["thread"].start()
+        self.speedtest_stop()
+        self.exit = Event()  # set started
+        self.worker = Thread(target=self.speedtest, args=[minutes])
+        self.worker.start()
 
     def speedtest_stop(self):
-        if not self.workers["speedtest"]["running"]:
-            return
-
-        self.workers["speedtest"]["running"] = False
-        self.workers["speedtest"]["thread"].join()
+        if self.exit.is_set():
+            if not self.worker:
+                return
+            while self.worker.is_alive():
+                # wait until task is finished
+                sleep(0.1)
+        else:
+            self.exit.set()
 
     def speedtest_running(self):
-        return self.workers["speedtest"]["running"]
+        return not self.exit.is_set()
