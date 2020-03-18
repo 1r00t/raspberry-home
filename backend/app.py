@@ -1,45 +1,44 @@
 from flask import Flask, request, jsonify
 from flask_restful import Resource, Api
 from flask_cors import CORS
-import os
 
-from crontab import CronTab
+from jobcenter import Jobs
+
 
 app = Flask(__name__)
 CORS(app)
 api = Api(app)
 
+jobs = Jobs()
+
 
 class SpeedTest(Resource):
-    def __init__(self):
-        self.job = None
-        self.cron = CronTab(user=True)
-        command = os.environ["SPEEDTEST_CMD"]
-
-        for job in self.cron:
-            if job.comment == "speedtest":
-                self.job = job
-        if not self.job:
-            self.job = self.cron.new(command=command, comment="speedtest")
-            self.job.minute.every(2)
-            self.job.enable(False)
-            self.cron.write()
-
     def get(self):
-        return jsonify({"is_enabled": self.job.is_enabled()})
+        running = jobs.speedtest_running()
+        return jsonify({
+            "is_enabled": running
+        })
 
     def post(self):
         data = request.get_json()
+
+        # start speedtest
         if data.get("job") == "start":
-            self.job.enable()
-            if data.get("minute"):
-                self.job.minute.every(data.get("minute"))
-            self.cron.write()
-            return jsonify({"is_enabled": True})
+            minutes = data.get("minutes", 2)
+            jobs.speedtest_start(minutes)
+
+            return jsonify({
+                "is_enabled": jobs.speedtest_running()
+            })
+        
+        # stop speedtest
         elif data.get("job") == "stop":
-            self.job.enable(False)
-            self.cron.write()
-            return jsonify({"is_enabled": False})
+            jobs.speedtest_stop()
+
+            return jsonify({
+                "is_enabled": jobs.speedtest_running()
+            })
+
         return False
 
 
