@@ -30,7 +30,7 @@ class SpeedTest(Resource):
             return jsonify({
                 "is_enabled": jobs.speedtest_running()
             })
-        
+
         # stop speedtest
         elif data.get("job") == "stop":
             jobs.speedtest_stop()
