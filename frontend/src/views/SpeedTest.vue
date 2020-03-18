@@ -17,13 +17,14 @@ export default {
   data() {
     return {
       is_enabled: null,
-      enabledvariant: "secondary"
+      enabledvariant: "secondary",
+      baseUrl: process.env.VUE_APP_SPEEDTEST_URL
     };
   },
   methods: {
     startSpeedTest() {
       this.axios
-        .post("http://127.0.0.1:5000/speedtest", {
+        .post(this.baseUrl, {
           job: "start",
           minutes: 2
         })
@@ -31,7 +32,7 @@ export default {
     },
     stopSpeedTest() {
       this.axios
-        .post("http://127.0.0.1:5000/speedtest", {
+        .post(this.baseUrl, {
           job: "stop"
         })
         .then(response => (this.is_enabled = response.data.is_enabled));
@@ -47,8 +48,9 @@ export default {
     }
   },
   mounted() {
+    console.log("#############: " + this.baseUrl)
     this.axios
-      .get("http://127.0.0.1:5000/speedtest")
+      .get(this.baseUrl)
       .then(response => (this.is_enabled = response.data.is_enabled));
   }
 };
