@@ -3,7 +3,6 @@ WORKDIR /code
 
 ENV FLASK_APP /code/app.py
 ENV FLASK_RUN_HOST 0.0.0.0
-ENV SPEEDTEST_CMD python /code/speedtest_job.py
 
 RUN apk add --no-cache gcc musl-dev linux-headers
 
@@ -12,7 +11,4 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-ADD entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-
-CMD [ "/entrypoint.sh" ]
+CMD [ "flask", "run" ]

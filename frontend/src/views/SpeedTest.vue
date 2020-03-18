@@ -23,15 +23,15 @@ export default {
   methods: {
     startSpeedTest() {
       this.axios
-        .post("http://raspberrypi:5000/speedtest", {
+        .post("http://127.0.0.1:5000/speedtest", {
           job: "start",
-          minute: 2
+          minutes: 2
         })
         .then(response => (this.is_enabled = response.data.is_enabled));
     },
     stopSpeedTest() {
       this.axios
-        .post("http://raspberrypi:5000/speedtest", {
+        .post("http://127.0.0.1:5000/speedtest", {
           job: "stop"
         })
         .then(response => (this.is_enabled = response.data.is_enabled));
@@ -48,7 +48,7 @@ export default {
   },
   mounted() {
     this.axios
-      .get("http://raspberrypi:5000/speedtest")
+      .get("http://127.0.0.1:5000/speedtest")
       .then(response => (this.is_enabled = response.data.is_enabled));
   }
 };
