@@ -8,6 +8,7 @@ class Jobs():
         self.exit = Event()
         self.exit.set()
         self.worker = None
+        self.minutes = 2
 
     def speedtest(self, minutes=2):
         speedtest = SpeedTest()
@@ -19,9 +20,10 @@ class Jobs():
             self.exit.wait(minutes * 60)
 
     def speedtest_start(self, minutes):
+        self.minutes = int(minutes)
         self.speedtest_stop()
         self.exit = Event()  # set started
-        self.worker = Thread(target=self.speedtest, args=[minutes])
+        self.worker = Thread(target=self.speedtest, args=[self.minutes])
         self.worker.start()
 
     def speedtest_stop(self):
@@ -36,3 +38,6 @@ class Jobs():
 
     def speedtest_running(self):
         return not self.exit.is_set()
+    
+    def speedtest_minutes(self):
+        return self.minutes

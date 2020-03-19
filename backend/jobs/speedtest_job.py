@@ -17,7 +17,7 @@ class SpeedTest():
         self.result_json = None
 
     def run(self):
-        self.time = datetime.now().strftime("%d.%m.%Y %H:%M:%S")
+        self.time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
         try:
             self.st = speedtest.Speedtest()
