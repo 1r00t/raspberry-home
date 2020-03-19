@@ -21,10 +21,28 @@ class SpeedTest(Resource):
 
     def get(self):
         speed_data = self._get_speed_data()
+
+        times = [t["time"] for t in speed_data]
+
+        datasets = [{
+            "label": "download",
+            "data": [float(d["download"]) / 1000000 for d in speed_data]
+        }, {
+            "label": "upload",
+            "data": [float(d["upload"]) / 1000000 for d in speed_data]
+        }]
+        # }, {
+        #     "label": "ping",
+        #     "data": [d["ping"] for d in speed_data]
+        # }]
+
         running = jobs.speedtest_running()
+        minutes = jobs.speedtest_minutes()
         return jsonify({
             "is_enabled": running,
-            "speed_data": speed_data
+            "labels": times,
+            "datasets": datasets,
+            "minutes": minutes
         })
 
     def post(self):
