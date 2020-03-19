@@ -6,7 +6,7 @@ import pathlib
 
 
 BASE_DIR = pathlib.Path(__file__).parent.absolute()
-LOG_CSV = os.path.join(BASE_DIR, "connection_log.csv")
+LOG_CSV = os.environ.get("SPEEDTEST_CSV_FILE")
 
 
 class SpeedTest():

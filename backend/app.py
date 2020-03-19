@@ -4,6 +4,9 @@ from flask_cors import CORS
 
 from jobcenter import Jobs
 
+import os
+import csv
+
 
 app = Flask(__name__)
 CORS(app)
@@ -13,10 +16,15 @@ jobs = Jobs()
 
 
 class SpeedTest(Resource):
+    def __init__(self):
+        self.connection_log = os.environ.get("SPEEDTEST_CSV_FILE")
+
     def get(self):
+        speed_data = self._get_speed_data()
         running = jobs.speedtest_running()
         return jsonify({
-            "is_enabled": running
+            "is_enabled": running,
+            "speed_data": speed_data
         })
 
     def post(self):
@@ -40,6 +48,15 @@ class SpeedTest(Resource):
             })
 
         return False
+
+    def _get_speed_data(self):
+        speed_data = []
+        if os.path.exists(self.connection_log):
+            with open(self.connection_log, newline="") as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    speed_data.append(row)
+        return speed_data
 
 
 api.add_resource(SpeedTest, "/speedtest")
