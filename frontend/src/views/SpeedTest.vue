@@ -1,7 +1,7 @@
 <template>
   <div class="speedtest">
     <h1>Speedtest</h1>
-    <h2>Status: <b-badge :variant="enabledvariant">{{ is_enabled ? "enabled": "disabled "}}</b-badge></h2>
+    <h2>Status: <b-badge :variant="enabledvariant">{{ is_enabled ? "enabled": "disabled"}}</b-badge></h2>
     <div>
       <b-button-group>
         <b-button @click="startSpeedTest()">Start</b-button>
