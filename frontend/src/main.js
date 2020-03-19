@@ -9,6 +9,8 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 import App from "./App.vue";
 import router from "./router";
 
+// import Line from "./components/Chart.vue"
+
 Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
 Vue.use(VueAxios, axios);
@@ -17,5 +19,8 @@ Vue.config.productionTip = false;
 
 new Vue({
   router,
-  render: h => h(App)
+  render: h => h(App),
+  // components: {
+  //   "Line": Line
+  // }
 }).$mount("#app");
