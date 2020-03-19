@@ -1,8 +1,0 @@
-time,connected,download,upload,ping,server
-2020-03-19 17:34:01,True,62390214.84535379,12904712.766439361,36.191,http://warp.cronon.net:8080/speedtest/upload.php
-2020-03-19 17:35:27,True,62207008.35871136,14168651.758123597,35.01,http://speedtest01.dns-net.de:8080/speedtest/upload.php
-2020-03-19 17:36:51,True,59080461.64491113,12771085.734162416,38.902,http://speedtest01.dns-net.de:8080/speedtest/upload.php
-2020-03-19 17:38:14,True,57252982.808338195,12907571.437934946,39.914,http://speedtest-berlin.colocationix.de:8080/speedtest/upload.php
-2020-03-19 17:39:38,True,63091948.77940037,11310828.818991534,37.36,http://warp.cronon.net:8080/speedtest/upload.php
-2020-03-19 17:41:04,True,55149293.986911245,11259036.343349531,37.176,http://speedtest-berlin.colocationix.de:8080/speedtest/upload.php
-2020-03-19 17:42:29,True,57730532.72556569,11556283.208635146,37.762,http://speedtest01.dns-net.de:8080/speedtest/upload.php
