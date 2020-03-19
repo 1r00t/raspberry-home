@@ -4,6 +4,7 @@ import os
 from csv import DictWriter
 import pathlib
 
+# TODO: Use a database for storing
 
 BASE_DIR = pathlib.Path(__file__).parent.absolute()
 LOG_CSV = os.environ.get("SPEEDTEST_CSV_FILE")

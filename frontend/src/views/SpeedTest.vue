@@ -16,7 +16,7 @@
                 v-model="minutes"
                 type="range"
                 min="1"
-                max="60"
+                max="30"
               ></b-form-input>
             </b-input-group>
           </b-card>

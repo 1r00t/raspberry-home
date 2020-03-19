@@ -26,10 +26,20 @@ class SpeedTest(Resource):
 
         datasets = [{
             "label": "download",
-            "data": [float(d["download"]) / 1000000 for d in speed_data]
+            "data": [float(d["download"]) / 1000000 for d in speed_data],
+            "backgroundColor": "rgba(0, 123, 255, 1.0)",
+            "borderColor": "rgba(0, 123, 255, 0.5)",
+            "fill": False,
+            "lineTension": 0.1,
+            "pointRadius": 5
         }, {
             "label": "upload",
-            "data": [float(d["upload"]) / 1000000 for d in speed_data]
+            "data": [float(d["upload"]) / 1000000 for d in speed_data],
+            "backgroundColor": "rgba(255, 193, 7, 1.0)",
+            "borderColor": "rgba(255, 193, 7, 0.5)",
+            "fill": False,
+            "lineTension": 0.1,
+            "pointRadius": 5
         }]
         # }, {
         #     "label": "ping",

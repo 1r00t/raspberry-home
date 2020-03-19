@@ -35,7 +35,6 @@ export default {
       this.chartdata = {
           labels: this.labels,
           datasets: this.datasets,
-          backgroundColor: ["red", "blue"],
       }
       this.options = {
         scales: {
