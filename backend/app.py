@@ -40,11 +40,11 @@ class SpeedTest(Resource):
             "fill": False,
             "lineTension": 0.1,
             "pointRadius": 5
+        }, {
+            "label": "ping",
+            "data": [d["ping"] for d in speed_data],
+            "type": "bar"
         }]
-        # }, {
-        #     "label": "ping",
-        #     "data": [d["ping"] for d in speed_data]
-        # }]
 
         running = jobs.speedtest_running()
         minutes = jobs.speedtest_minutes()
