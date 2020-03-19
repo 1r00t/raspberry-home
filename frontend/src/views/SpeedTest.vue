@@ -1,21 +1,9 @@
 <template>
-  <!-- <div class="speedtest">
-    <h1>Speedtest</h1>
-    <h2>Status: <b-badge :variant="enabledvariant">{{ is_enabled ? "enabled": "disabled"}}</b-badge></h2>
-    <div>
-      <b-button-group>
-        <b-button @click="startSpeedTest()">Start</b-button>
-        <b-button @click="stopSpeedTest()">Stop</b-button>
-      </b-button-group>
-    </div>
-  </div> -->
-
   <div class="speedtest">
     <b-row>
-      <b-col cols="4">
-        <b-card-group deck>
+      <b-col lg="4">
+        <b-card-group deck class="pb-4">
           <b-card header="Speedtest Settings" header-tag="header">
-            <!-- <b-card-title>Speedtest</b-card-title> -->
             <b-card-text>Test the speed every <b>x</b> minutes</b-card-text>
             <b-input-group :append="minutes + ' minutes'">
               <b-input-group-prepend is-text>
@@ -34,7 +22,7 @@
           </b-card>
         </b-card-group>
       </b-col>
-      <b-col cols="8">
+      <b-col lg="8">
         <b-card-group deck>
           <b-card header="Measured speed" header-tag="header">
             <SpeedTestChartContainer></SpeedTestChartContainer>
@@ -50,11 +38,11 @@ import SpeedTestChartContainer from "@/components/SpeedTestChartContainer.vue";
 export default {
   name: "SpeedTest",
   components: { SpeedTestChartContainer },
+
   data() {
     return {
       is_enabled: null,
       check_enabled: null,
-      //enabledvariant: "secondary",
       baseUrl: process.env.VUE_APP_SPEEDTEST_URL,
       minutes: 2
     };
@@ -62,7 +50,6 @@ export default {
 
   methods: {
     toggleSpeedTest() {
-      console.log("BLALALALALALALALA")
       if (this.is_enabled) {
         this.stopSpeedTest();
       } else {
