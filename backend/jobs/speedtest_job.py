@@ -30,7 +30,11 @@ class SpeedTest():
         self.st.get_best_server()
         self.st.download(threads=self.threads)
         self.st.upload(threads=self.threads)
-        self.st.results.share()
+        try:
+            self.st.results.share()
+        except speedtest.ShareResultsConnectFailure:
+            self.no_connection()
+            return
 
         result = self.st.results.dict()
 
